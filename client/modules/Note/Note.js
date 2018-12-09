@@ -10,6 +10,10 @@ import {compose} from 'redux';
   //<li className={styles.Note} {...props}>{props.children}</li>;
 
 class Note extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
   render() {
     const {
       connectDragSource,
@@ -58,6 +62,11 @@ const noteTarget = {
 
 Note.propTypes = {
   children: PropTypes.any,
+  connectDragSource: PropTypes.func,
+  connectDropTarget: PropTypes.func,
+  isDragging: PropTypes.bool,
+  editing: PropTypes.bool,
+  task: PropTypes.string,
 };
 
 export default compose(

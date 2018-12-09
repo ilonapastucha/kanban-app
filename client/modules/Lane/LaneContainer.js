@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import Lane from './Lane';
 import { compose } from 'redux';
-import { createLaneRequest, fetchLanes } from '../Lane/LaneActions';
-import { deleteLaneRequest, updateLaneRequest, editLane, moveBetweenLanes } from './LaneActions';
+import { createLaneRequest, fetchLanes, deleteLaneRequest, updateLaneRequest, editLane, moveBetweenLanes, removeFromLane, pushToLane, } from './LaneActions';
 import { createNoteRequest } from '../Note/NoteActions';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../Kanban/itemTypes';
@@ -12,12 +11,15 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = {
-    editLane,
-    addNote: createNoteRequest,
-    deleteLane: deleteLaneRequest,
-    updateLane: updateLaneRequest,
-    createLane: createLaneRequest,
-    moveBetweenLanes
+  editLane,
+  deleteLane: deleteLaneRequest,
+  updateLane: updateLaneRequest,
+  addNote: createNoteRequest,
+  createLane: createLaneRequest,
+  moveBetweenLanes,
+  removeFromLane,
+  pushToLane,
+  fetchLanes,
 };
 
 const noteTarget = {
@@ -33,7 +35,7 @@ const noteTarget = {
       );
     }
   },
- };
+};
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),

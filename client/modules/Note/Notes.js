@@ -5,18 +5,21 @@ import PropTypes from 'prop-types';
 import Edit from '../../components/Edit';
 
 const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane}) => {
-  return (<ul className="notes">{notes.map((note) =>
+  return (<ul>{notes.map((note) =>
     <Note
       id={note.id}
       key={note.id}
-      moveWithinLane={moveWithinLane}
+      editing={note.editing}
       laneId={laneId}
+      task={note.task}
+      moveWithinLane={moveWithinLane}
+      _id={note._id}
     >
     <Edit
       editing={note.editing}
       value={note.task}
       onValueClick={() => editNote(note.id)}
-      onUpdate={task => updateNote({
+      onUpdate={(task) => updateNote({
         ...note,
         task,
         editing: false,
@@ -25,7 +28,7 @@ const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane
     />
   </Note>
   )}</ul>);
-} 
+};
 
 
 
@@ -35,6 +38,8 @@ Notes.propTypes = {
   laneId: PropTypes.string,
   editNote: PropTypes.func,
   notes: PropTypes.array,
+  task: PropTypes.string,
+  moveWithinLane: PropTypes.func,
 };
 
 export default Notes;

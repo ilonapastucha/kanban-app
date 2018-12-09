@@ -35,7 +35,6 @@ export function updateNote(note) {
 export function updateNoteRequest(note) {
     return (dispatch) => {
         return callApi('notes','put', {id: note.id, task: note.task} ).then(noteResp => {
-            console.log(note, noteResp);
             dispatch(updateNote(noteResp));
         });
     }

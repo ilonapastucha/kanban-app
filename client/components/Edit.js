@@ -6,17 +6,15 @@ import styles from './Edit.css';
 
 export default class Edit extends Component {
   checkEnter = (e) => {
-    if (e.key === 'Enter') {
+    return e.key === 'Enter' &&
         this.finishEdit(e);
-      }
   }
 
   finishEdit = (e) => {
     const value = e.target.value;
 
-    if (this.props.onUpdate) {
+    return this.props.onUpdate &&
       this.props.onUpdate(value.trim());
-    }
   }
 
   renderDelete = () => {
@@ -25,11 +23,10 @@ export default class Edit extends Component {
 
   renderValue = () => {
     const { value, onDelete, onValueClick } = this.props;
-
     return (
     <div>
-      <span className={styles.value} onClick={onValueClick}>{value}</span>
       {onDelete ? this.renderDelete() : null}
+      <span className={styles.value} onClick={onValueClick}>{value}</span>
     </div>
     );
   }
@@ -47,7 +44,6 @@ export default class Edit extends Component {
   }
 
   render() {
-
     return (
       <div className={this.props.className}>
         {this.props.editing ? this.renderEdit() : this.renderValue()}
@@ -62,4 +58,5 @@ Edit.propTypes = {
   onValueClick: PropTypes.func,
   onDelete: PropTypes.func,
   editing: PropTypes.bool,
+  className: PropTypes.string,
 };
