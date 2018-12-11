@@ -42,13 +42,11 @@ export function updateLane(lane) {
 
 export function updateLaneRequest(lane) {
   return (dispatch) => {
-    return callApi('lanes', 'put', {id: lane.id, name: lane.name}).then(laneResp => {
-      console.log(lane, laneResp);
+    return callApi(`lanes/${lane.id}`, 'put', { name: lane.name, editing: lane.editing }).then(() => {
       dispatch(updateLane(lane));
-    })
-  }
+    });
+  };
 }
-  
 export function deleteLane(laneId) {
     return {
       type: DELETE_LANE,
