@@ -3,7 +3,7 @@ import Lane from './Lane';
 import { compose } from 'redux';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../Kanban/itemTypes';
-import { createLaneRequest, fetchLanes, deleteLaneRequest, updateLaneRequest, editLane, moveBetweenLanes, removeFromLane, pushToLane} from './LaneActions';
+import { createLaneRequest, fetchLanes, deleteLaneRequest, updateLaneRequest, editLane, moveBetweenLanes, removeFromLane, pushToLane, changeLanesRequest } from './LaneActions';
 import { createNoteRequest } from '../Note/NoteActions';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -11,19 +11,14 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const noteTarget = {
-  hover(targetProps, monitor) {
+  drop(targetProps, monitor) {
     const sourceProps = monitor.getItem();
-    const { id: noteId, laneId: sourceLaneId } = sourceProps;
- 
-    if (!targetProps.lane.notes.length) {
-      targetProps.moveBetweenLanes(
-        targetProps.lane.id,
-        noteId,
-        sourceLaneId,
-      );
+    const { id: noteId, laneId: sourceLaneId, task: task } = sourceProps;
+    if (targetProps.lane.id !== sourceLaneId) {
+      targetProps.changeLanesRequest(sourceLaneId, targetProps.lane.id, noteId, task);
     }
   },
- };
+};
 
 const mapDispatchToProps = {
   editLane,
@@ -35,6 +30,7 @@ const mapDispatchToProps = {
   removeFromLane,
   pushToLane,
   fetchLanes,
+  changeLanesRequest,
 };
 
 export default compose(
