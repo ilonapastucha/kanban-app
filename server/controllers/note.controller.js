@@ -6,7 +6,7 @@ export function addNote(req, res) {
   const { note, laneId } = req.body;
 
   if (!note || !note.task || !laneId) {
-    res.status(400).end();
+    return res.status(400).end();
   }
 
   const newNote = new Note({
@@ -16,7 +16,7 @@ export function addNote(req, res) {
   newNote.id = uuid();
   newNote.save((err, saved) => {
     if (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
     Lane.findOne({ id: laneId })
       .then(lane => {

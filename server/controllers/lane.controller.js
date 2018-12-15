@@ -1,6 +1,8 @@
 import Lane from '../models/lane';
 import Note from '../models/note';
 import uuid from 'uuid';
+import { resolve } from 'path';
+import { rejects } from 'assert';
 
 export function getSomething(req, res) {
   return res.status(200).end();
@@ -61,4 +63,54 @@ export function editLane(req, res) {
       res.json(saved);
     });
   })
+}
+
+const removeFromSourceLane = (laneId, noteId) => new Promise((resolve, rejects) => {
+  Lane.findOne({ id: laneId }).exec((err, lane) => {
+    if (err) {
+      rejects(err);
+    }
+    lane.notes = lane.notes.filter(n => n.id !== noteId);
+    lane.save((err, saved) => {
+      if (err) {
+        rejects(err);
+      }
+      resolve();
+    });
+  })
+})
+
+const addToTargetLane = (laneId, noteId) => new Promise((resolve, rejects) => {
+  Lane.findOne({ id: laneId }).exec((err, lane) => {
+    if (err) {
+      rejects(err);
+    }
+    Note.findOne({ id: noteId }).exec((err, note) => {
+      if (err) {
+        rejects(err);
+      }
+      lane.notes.push(note)
+      lane.save((err, saved) => {
+        if (err) {
+          rejects(err);
+        }
+      resolve();
+      })
+    });
+  })
+})
+
+export const moveNote = (req, res) => {
+  const noteId = req.params.noteId;
+  const sourceLaneId = req.body.sourceId;
+  const targetLaneId = req.body.targetId;
+
+  removeFromSourceLane(sourceLaneId, noteId)
+    .then (() => addToTargetLane(targetLaneId, noteId))
+    .then (() => {
+      res.status(200).end();
+    })
+    .catch((err) => {
+      res.status(500).send(err)
+    })
 }

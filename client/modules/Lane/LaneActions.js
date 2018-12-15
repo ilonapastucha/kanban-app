@@ -105,10 +105,10 @@ export function removeFromLane(sourceLaneId, noteId) {
 
 export function changeLanesRequest(sourceLaneId, targetLaneId, noteId, newTask) {
   return (dispatch) => {
-    return callApi(`notes/${noteId}`, 'delete')
-      .then(() => {
-        callApi('notes', 'post', { note: { id: noteId, task: newTask }, laneId: targetLaneId });
-      })
+    return callApi(`notes/${noteId}/move`, 'put', {
+      targetId: targetLaneId,
+      sourceId: sourceLaneId
+    })
       .then(() => {
         dispatch(removeFromLane(
           sourceLaneId,

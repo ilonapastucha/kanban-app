@@ -7,7 +7,7 @@ import { createLaneRequest, fetchLanes, deleteLaneRequest, updateLaneRequest, ed
 import { createNoteRequest } from '../Note/NoteActions';
 
 const mapStateToProps = (state, ownProps) => ({
-  laneNotes: ownProps.lane.notes.map(noteId => state.notes[noteId])
+  laneNotes: ownProps.lane.notes.filter(noteId => state.notes[noteId]).map(noteId => state.notes[noteId])
 });
 
 const noteTarget = {

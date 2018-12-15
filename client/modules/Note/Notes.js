@@ -1,7 +1,6 @@
 import React from 'react';
 import Note from './Note';
 import PropTypes from 'prop-types';
-//import styles from './Notes.css';
 import Edit from '../../components/Edit';
 
 const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane}) => {

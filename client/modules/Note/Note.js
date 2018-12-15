@@ -6,9 +6,6 @@ import ItemTypes from '../Kanban/itemTypes';
 import {DragSource, DropTarget} from 'react-dnd';
 import {compose} from 'redux';
 
-//const Note = (props) =>
-  //<li className={styles.Note} {...props}>{props.children}</li>;
-
 class Note extends React.Component {
   constructor(props) {
     super(props);
@@ -51,11 +48,11 @@ const noteSource = {
 };
 
 const noteTarget = {
-  hover(targetProps, monitor) {
+  drop(targetProps, monitor) {
     const sourceProps = monitor.getItem();
 
     if (targetProps.id !== sourceProps.id) {
-      targetProps.moveWithinLane(targetProps.laneId, targetProps.id, sourceProps.id);
+      targetProps.moveWithinLaneRequest(targetProps.laneId, targetProps.id, sourceProps.id);
     }
   }
 };

@@ -1,12 +1,11 @@
 /* Lane styles */
-
 .AddLane {
 	margin: 20px 10px;
 	border: none;
 	border-radius: 4px;
 	padding: 10px;
 	width: 300px;
-	background-color: gray;
+	background-color: #17a2b8;
 	color: #f1f1f1;
 	font-size: 15px;
 	font-weight: 300;
@@ -33,7 +32,7 @@
 	padding: 10px;
 	width: 300px;
 	height: auto;
-	background-color: bisque;
+	background-color: #ff9a9a;
 }
 
 .LaneHeader {
@@ -41,12 +40,12 @@
 }
 
 .LaneName {
-	display: inline-block;
 	border-top-left-radius: 4px;
 	padding: 10px;
 	width: 90%;
 	max-height: 38px;
-	background-color: darkgray;
+	float: left;
+	background-color: #17a2b8;
 	font-size: 1.2em;
 	font-weight: bold;
 	color: #f1f1f1;
@@ -63,7 +62,7 @@
 	outline: 0;
 	font-size: 1em;
 	color: #f1f1f1;
-	background-color: darkgrey;
+	background-color: #17a2b8;
 	width: 10%;
 	cursor: pointer;
 }
@@ -83,7 +82,7 @@
 	font-size: 0.8em;
 	color: #f1f1f1;
 	text-align: left;
-	background-color: darkgray;
+	background-color: #17a2b8;
 	cursor: pointer;
 }
 

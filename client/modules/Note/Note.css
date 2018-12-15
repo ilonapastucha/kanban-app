@@ -1,1 +1,38 @@
 /* Note styles */
+
+.Note {
+    margin: 10px 0;
+    padding: 10px;
+    list-style-type: none;
+      background-color: #f8f9fa;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  .Note span {
+    width: 90px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .Note button {
+    color: black;
+    background: #f8f9fa;
+    outline: 0;
+    border: 0;
+    background: inherit;
+    float: right;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 15px;
+  }
+  
+  input {
+    width: 100%;
+    font-size: 0.8em;
+    outline: 0;
+  }

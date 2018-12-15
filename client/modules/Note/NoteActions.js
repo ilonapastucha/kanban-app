@@ -70,6 +70,17 @@ export function createNotes(notesData) {
     };
 }
 
+export function moveWithinLaneRequest(noteId, targetId, sourceId) {
+    return (dispatch) => {
+        return callApi(`notes/${noteId}/sort`, 'put', {
+            targetId,
+            sourceId
+        }).then(() => {
+            dispatch(moveWithinLane(noteId, targetId, sourceId));
+        });
+    };
+}
+
 export function moveWithinLane(laneId, targetId, sourceId) {
     return {
       type: MOVE_WITHIN_LANE,
